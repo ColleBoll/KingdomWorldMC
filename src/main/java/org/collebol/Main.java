@@ -1,6 +1,8 @@
 package org.collebol;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.collebol.commands.development.DevelopmentCmd;
+import org.collebol.commands.development.TabCompleteDevelopment;
 import org.collebol.general.config.ConfigHandler;
 
 /**
@@ -26,6 +28,11 @@ public class Main extends JavaPlugin {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
         this.configHandler = new ConfigHandler(this);
+
+        // Command register
+        getCommand("development").setExecutor(new DevelopmentCmd(this));
+
+        getCommand("development").setTabCompleter(new TabCompleteDevelopment());
     }
 
     @Override

@@ -2,3 +2,15 @@ name: KingdomWorldMC
 version: '${project.version}'
 main: org.collebol.Main
 api-version: '1.21.5'
+permissions:
+  kingdomworld.role.developer:
+    description: Developer groep.
+  kingdomworld.role.admin:
+    description: Admin groep.
+  kingdomworld.role.king:
+    description: King groep.
+commands:
+  development:
+    aliases:
+      - dev
+    description: Command voor developers.
