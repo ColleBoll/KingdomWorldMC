@@ -13,19 +13,22 @@ public abstract class ConfigFile {
     private FileConfiguration customFile;
 
     private String pluginName;
-    private String fileName;
+    private String configName;
+    private String extension;
 
-     public ConfigFile(String pluginName, String fileName) {
+     public ConfigFile(String pluginName, String configName, String extension) {
         this.pluginName = pluginName;
-        this.fileName = fileName;
+        this.configName = configName;
+        this.extension = extension;
      }
 
     public void setup(){
-        file = new File(Bukkit.getServer().getPluginManager().getPlugin(pluginName).getDataFolder(), fileName);
+        file = new File(Bukkit.getServer().getPluginManager().getPlugin(pluginName).getDataFolder(), configName + extension);
 
         if(!file.exists()){
             try{
                 file.createNewFile();
+                System.out.println("Created new config file: " + configName + extension);
             }catch (IOException e){
 
             }

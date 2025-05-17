@@ -23,6 +23,8 @@ public class Main extends JavaPlugin {
         this.plugin = this;
 
         // RegisterHandlers
+        getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
         this.configHandler = new ConfigHandler(this);
     }
 

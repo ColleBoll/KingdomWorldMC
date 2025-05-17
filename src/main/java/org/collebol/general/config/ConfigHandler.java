@@ -1,5 +1,6 @@
 package org.collebol.general.config;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.collebol.Main;
 
 import java.util.ArrayList;
@@ -11,11 +12,11 @@ public class ConfigHandler {
 
     private Main instance;
 
-    private Map<Class<? extends ConfigFile>, ConfigFile> configFiles;
+    private Map<String, ConfigFile> configFiles;
 
     private void registerConfigs() {
-        this.configFiles.put(LandenConfig.class, new LandenConfig("KingdomWorldMC", "landen.yml"));
-        this.configFiles.put(RolesConfig.class, new RolesConfig("KingdomWorldMC", "roles.yml"));
+        this.configFiles.put("landen", new LandenConfig("KingdomWorldMC", "landen", ".yml"));
+        this.configFiles.put("roles", new RolesConfig("KingdomWorldMC", "roles", ".yml"));
     }
 
     public ConfigHandler(Main i) {
@@ -26,13 +27,20 @@ public class ConfigHandler {
         setupFiles();
     }
 
-    public ConfigFile getConfig(Class<? extends ConfigFile> config) {
-        return this.configFiles.get(config);
+    public ConfigFile getConfig(String configName) {
+        return this.configFiles.get(configName);
+    }
+
+    public FileConfiguration getDefaultConfig() {
+        return this.instance.getConfig();
     }
 
     public void setupFiles() {
+        System.out.println("Setting up config files.");
         for (ConfigFile file : this.configFiles.values()) {
             file.setup();
+            file.get().options().copyDefaults(true);
+            file.save();
         }
     }
 }
