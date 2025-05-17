@@ -1,6 +1,7 @@
 package org.collebol;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.collebol.general.config.ConfigHandler;
 
 /**
  *
@@ -13,13 +14,16 @@ public class Main extends JavaPlugin {
 
     private Main plugin;
 
+    private ConfigHandler configHandler;
+
     @Override
     public void onEnable() {
         super.onEnable();
-
         System.out.println("Kingdom World Plugin starting!");
-
         this.plugin = this;
+
+        // RegisterHandlers
+        this.configHandler = new ConfigHandler(this);
     }
 
     @Override
@@ -29,5 +33,9 @@ public class Main extends JavaPlugin {
 
     public Main instance() {
         return this.plugin;
+    }
+
+    public ConfigHandler getConfigHandler() {
+        return configHandler;
     }
 }
